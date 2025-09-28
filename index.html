@@ -1,1451 +1,177 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Grita Agrícola</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --verde-principal: #2e7d32;
-            --verde-oscuro: #1b5e20;
-            --verde-claro: #81c784;
-            --blanco: #ffffff;
-            --gris-claro: #f5f5f5;
-            --gris-texto: #666666;
-            --amarillo: #ffeb3b;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--gris-claro);
-            color: var(--gris-texto);
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--verde-principal), var(--verde-oscuro));
-            color: var(--blanco);
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            font-weight: 400;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-            position: relative;
-        }
-        
-        .search-bar input {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: 2px solid var(--verde-principal);
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .search-bar input:focus {
-            border-color: var(--verde-oscuro);
-            box-shadow: 0 0 10px rgba(46, 125, 50, 0.3);
-        }
-        
-        .categorias {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .categoria-btn {
-            background: var(--verde-principal);
-            color: var(--blanco);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        
-        .categoria-btn:hover {
-            background: var(--verde-oscuro);
-            transform: translateY(-2px);
-        }
-        
-        .categoria-btn.active {
-            background: var(--verde-oscuro);
-            transform: scale(1.05);
-        }
-        
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-        
-        .producto-card {
-            background: var(--blanco);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .producto-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-        }
-        
-        .producto-imagen {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(45deg, var(--verde-claro), var(--verde-principal));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--blanco);
-            font-size: 3rem;
-            font-weight: bold;
-        }
-        
-        .producto-info {
-            padding: 1.5rem;
-        }
-        
-        .producto-nombre {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--verde-principal);
-            margin-bottom: 0.5rem;
-        }
-        
-        .calificacion-interactiva {
-            margin-bottom: 1rem;
-            color: var(--amarillo);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        
-        .calificacion-interactiva span {
-            margin-right: 2px;
-        }
-        
-        .producto-descripcion {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            color: var(--gris-texto);
-        }
-        
-        .beneficios {
-            background-color: var(--verde-claro);
-            color: var(--verde-oscuro);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        
-        .beneficios h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .beneficios ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .beneficios li {
-            font-size: 0.9rem;
-            margin: 0.3rem 0;
-            padding-left: 1.2rem;
-            position: relative;
-        }
-        
-        .beneficios li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--verde-oscuro);
-            font-weight: bold;
-        }
-        
-        .nutricional {
-            background-color: #e8f5e9;
-            border-left: 4px solid var(--verde-principal);
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .nutricional h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--verde-oscuro);
-            margin-bottom: 0.5rem;
-        }
-        
-        .categoria-seccion {
-            display: none;
-        }
-        
-        .categoria-seccion.active {
-            display: block;
-        }
-        
-        .sobre-mi {
-            background: linear-gradient(135deg, var(--verde-claro), var(--blanco));
-            padding: 3rem 0;
-            margin: 3rem 0;
-            border-radius: 20px;
-            text-align: center;
-        }
-        
-        .sobre-mi h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--verde-oscuro);
-            margin-bottom: 1rem;
-        }
-        
-        .sobre-mi p {
-            max-width: 800px;
-            margin: 0 auto 1.5rem auto;
-            line-height: 1.6;
-        }
-        
-        .contacto {
-            background: var(--verde-principal);
-            color: var(--blanco);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .contacto h3 {
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 1rem;
-        }
-        
-        .whatsapp-link {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .whatsapp-link:hover {
-            transform: scale(1.05);
-        }
-        
-        .chat-section {
-            background: var(--blanco);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem 0;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        }
-        
-        .chat-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--verde-principal);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .chat-messages {
-            height: 300px;
-            overflow-y: auto;
-            border: 2px solid var(--verde-claro);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background-color: #f9f9f9;
-        }
-        
-        .message {
-            background: var(--verde-claro);
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .message strong {
-            color: var(--verde-oscuro);
-        }
-        
-        .chat-input {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .chat-input input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 2px solid var(--verde-principal);
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-        }
-        
-        .chat-input button {
-            background: var(--verde-principal);
-            color: var(--blanco);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-        
-        .chat-input button:hover {
-            background: var(--verde-oscuro);
-        }
-        
-        footer {
-            background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-principal));
-            color: var(--blanco);
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .footer-content h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .autor {
-            font-style: italic;
-            margin-top: 1rem;
-            font-weight: 600;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .categorias {
-                gap: 0.5rem;
-            }
-            
-            .categoria-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .productos-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .header-content, main, .footer-content {
-                padding: 0 1rem;
-            }
-            
-            .chat-input {
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <h1>La Grita Agrícola</h1>
-            <p class="subtitle">Descubre los principales rubros agrícolas de nuestra región, organizados por categorías. Conoce sus beneficios nutricionales, utilidades y todo lo que necesitas saber sobre estos productos esenciales.</p>
-        </div>
-    </header>
-    
-    <main>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Buscar productos...">
-        </div>
-        
-        <div class="categorias">
-            <button class="categoria-btn active" data-categoria="hortalizas">Hortalizas</button>
-            <button class="categoria-btn" data-categoria="frutas">Frutas</button>
-        </div>
-        
-        <!-- Hortalizas -->
-        <div class="categoria-seccion active" id="hortalizas">
-            <div class="productos-grid" id="hortalizas-grid">
-                <!-- Maíz -->
-                <div class="producto-card" data-nombre="maíz">
-                    <div class="producto-imagen">🌽</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Maíz</h3>
-                        <div class="calificacion-interactiva" data-producto="maiz">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Cereal fundamental en la dieta latinoamericana, utilizado en múltiples preparaciones culinarias desde tortillas hasta arepas.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Rico en carbohidratos complejos</li>
-                                <li>Contiene fibra dietética</li>
-                                <li>Proporciona energía sostenida</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto en vitamina B, magnesio y antioxidantes como la luteína.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Caraota -->
-                <div class="producto-card" data-nombre="caraota">
-                    <div class="producto-imagen">🫘</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Caraota</h3>
-                        <div class="calificacion-interactiva" data-producto="caraota">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Legumbre esencial en la gastronomía venezolana, rica en proteínas y fibra, base de platos tradicionales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Excelente fuente de proteína vegetal</li>
-                                <li>Regula los niveles de azúcar</li>
-                                <li>Mejora la digestión</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en hierro, folato, potasio y proteínas completas.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Cebollín -->
-                <div class="producto-card" data-nombre="cebollín">
-                    <div class="producto-imagen">🌿</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Cebollín</h3>
-                        <div class="calificacion-interactiva" data-producto="cebollin">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Hierba aromática utilizada como condimento en múltiples preparaciones culinarias, aporta sabor y propiedades medicinales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Propiedades antibacterianas</li>
-                                <li>Mejora la circulación</li>
-                                <li>Estimula el apetito</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Rico en vitamina K, vitamina C y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Batata -->
-                <div class="producto-card" data-nombre="batata">
-                    <div class="producto-imagen">🍠</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Batata</h3>
-                        <div class="calificacion-interactiva" data-producto="batata">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Tubérculo dulce y versátil, excelente sustituto de la papa con mayor contenido nutricional y menor índice glucémico.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Regula el azúcar en sangre</li>
-                                <li>Mejora la salud ocular</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Extremadamente alta en vitamina A (beta-caroteno), vitamina C y manganeso.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Ají -->
-                <div class="producto-card" data-nombre="ají">
-                    <div class="producto-imagen">🌶️</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Ají</h3>
-                        <div class="calificacion-interactiva" data-producto="aji">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Pimiento picante que aporta sabor intenso y propiedades medicinales a diversas preparaciones culinarias.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Acelera el metabolismo</li>
-                                <li>Tiene propiedades antiinflamatorias</li>
-                                <li>Mejora la circulación</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto en vitamina C, capsaicina y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Pimentón -->
-                <div class="producto-card" data-nombre="pimentón">
-                    <div class="producto-imagen">🫑</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Pimentón</h3>
-                        <div class="calificacion-interactiva" data-producto="pimenton">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Pimiento dulce de colores vibrantes, esencial en la cocina mediterránea y latinoamericana.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la salud cardiovascular</li>
-                                <li>Protege la vista</li>
-                                <li>Fortalece huesos y dientes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Uno de los alimentos más ricos en vitamina C, también contiene vitamina A y B6.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tomate -->
-                <div class="producto-card" data-nombre="tomate">
-                    <div class="producto-imagen">🍅</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Tomate</h3>
-                        <div class="calificacion-interactiva" data-producto="tomate">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruto versátil utilizado en salsas, ensaladas y guisos, fundamental en la dieta mediterránea.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Protege contra enfermedades cardíacas</li>
-                                <li>Tiene propiedades anticancerígenas</li>
-                                <li>Hidrata la piel</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto en licopeno, vitamina C, potasio y folato.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Cebolla -->
-                <div class="producto-card" data-nombre="cebolla">
-                    <div class="producto-imagen">🧅</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Cebolla</h3>
-                        <div class="calificacion-interactiva" data-producto="cebolla">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Bulbo aromático esencial en la cocina mundial, base de salsas, guisos y preparaciones culinarias.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Propiedades antibacterianas</li>
-                                <li>Mejora la digestión</li>
-                                <li>Reduce la inflamación</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Contiene quercetina, vitamina C, fibra y compuestos sulfurados.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Vainita -->
-                <div class="producto-card" data-nombre="vainita">
-                    <div class="producto-imagen">🥬</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Vainita</h3>
-                        <div class="calificacion-interactiva" data-producto="vainita">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Legumbre tierna y nutritiva, perfecta para guisos, ensaladas y preparaciones saludables.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Bajo en calorías</li>
-                                <li>Alto contenido de fibra</li>
-                                <li>Mejora la salud digestiva</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Rica en vitamina K, vitamina C, folato y manganeso.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Berenjena -->
-                <div class="producto-card" data-nombre="berenjena">
-                    <div class="producto-imagen">🍆</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Berenjena</h3>
-                        <div class="calificacion-interactiva" data-producto="berenjena">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Verdura versátil con textura carnosa, ideal para asar, freír o preparar en guisos tradicionales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la salud cerebral</li>
-                                <li>Controla el colesterol</li>
-                                <li>Propiedades antioxidantes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Contiene nasunina, fibra, potasio y vitamina B1.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Papa -->
-                <div class="producto-card" data-nombre="papa">
-                    <div class="producto-imagen">🥔</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Papa</h3>
-                        <div class="calificacion-interactiva" data-producto="papa">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Tubérculo básico en la alimentación mundial, versátil y nutritivo, base de múltiples preparaciones.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Proporciona energía rápida</li>
-                                <li>Mejora la función muscular</li>
-                                <li>Regula la presión arterial</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en potasio, vitamina C, vitamina B6 y carbohidratos complejos.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Calabacín -->
-                <div class="producto-card" data-nombre="calabacín">
-                    <div class="producto-imagen">🥒</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Calabacín</h3>
-                        <div class="calificacion-interactiva" data-producto="calabacin">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Calabaza tierna y versátil, perfecta para preparaciones saludables y dietas bajas en calorías.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Hidrata el cuerpo</li>
-                                <li>Mejora la salud ocular</li>
-                                <li>Apoya la pérdida de peso</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Rico en agua, vitamina C, vitamina A y fibra dietética.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Aguacate -->
-                <div class="producto-card" data-nombre="aguacate">
-                    <div class="producto-imagen">🥑</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Aguacate</h3>
-                        <div class="calificacion-interactiva" data-producto="aguacate">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruto cremoso rico en grasas saludables, perfecto para ensaladas, guacamole y preparaciones gourmet.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Grasas monoinsaturadas saludables</li>
-                                <li>Mejora la absorción de nutrientes</li>
-                                <li>Protege la salud cardiovascular</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto en grasas saludables, potasio, vitamina E, vitamina K y folato.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Apio España -->
-                <div class="producto-card" data-nombre="apio españa">
-                    <div class="producto-imagen">🥬</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Apio España</h3>
-                        <div class="calificacion-interactiva" data-producto="apio">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Variedad de apio con tallos gruesos y crujientes, ideal para sopas, jugos y preparaciones culinarias.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Propiedades antiinflamatorias</li>
-                                <li>Mejora la digestión</li>
-                                <li>Desintoxica el organismo</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Contiene apigenina, vitamina K, potasio y fibra insoluble.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Cilantro -->
-                <div class="producto-card" data-nombre="cilantro">
-                    <div class="producto-imagen">🌿</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Cilantro</h3>
-                        <div class="calificacion-interactiva" data-producto="cilantro">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Hierba aromática esencial en la cocina latinoamericana, aporta sabor fresco y propiedades medicinales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Desintoxica metales pesados</li>
-                                <li>Mejora la digestión</li>
-                                <li>Propiedades antibacterianas</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Rico en vitamina K, vitamina A, vitamina C y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Perejil -->
-                <div class="producto-card" data-nombre="perejil">
-                    <div class="producto-imagen">🌿</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Perejil</h3>
-                        <div class="calificacion-interactiva" data-producto="perejil">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Hierba aromática versátil utilizada como condimento y decoración en múltiples preparaciones culinarias.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Mejora la salud renal</li>
-                                <li>Propiedades diuréticas</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Extremadamente alto en vitamina K, vitamina C y folato.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Ahuyama -->
-                <div class="producto-card" data-nombre="ahuyama">
-                    <div class="producto-imagen">🎃</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Ahuyama</h3>
-                        <div class="calificacion-interactiva" data-producto="ahuyama">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Calabaza dulce y versátil, perfecta para sopas, purés y postres nutritivos.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la salud ocular</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Apoya la salud digestiva</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Muy alta en beta-caroteno (vitamina A), vitamina C, potasio y fibra.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Pepino -->
-                <div class="producto-card" data-nombre="pepino">
-                    <div class="producto-imagen">🥒</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Pepino</h3>
-                        <div class="calificacion-interactiva" data-producto="pepino">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Hortaliza refrescante y crujiente, ideal para ensaladas, jugos y preparaciones saludables.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Hidrata intensamente</li>
-                                <li>Mejora la salud de la piel</li>
-                                <li>Apoya la digestión</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto contenido de agua, vitamina K, potasio y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Zanahoria -->
-                <div class="producto-card" data-nombre="zanahoria">
-                    <div class="producto-imagen">🥕</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Zanahoria</h3>
-                        <div class="calificacion-interactiva" data-producto="zanahoria">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Raíz naranja rica en betacaroteno, esencial para la salud ocular y la piel.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la visión nocturna</li>
-                                <li>Protege contra el envejecimiento</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Extremadamente alta en vitamina A (betacaroteno), vitamina K y fibra.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Frutas -->
-        <div class="categoria-seccion" id="frutas">
-            <div class="productos-grid" id="frutas-grid">
-                <!-- Manzana -->
-                <div class="producto-card" data-nombre="manzana">
-                    <div class="producto-imagen">🍎</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Manzana</h3>
-                        <div class="calificacion-interactiva" data-producto="manzana">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta crujiente y dulce, conocida por sus múltiples variedades y beneficios para la salud.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la digestión</li>
-                                <li>Reduce el colesterol</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Rica en fibra, vitamina C, potasio y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Pera -->
-                <div class="producto-card" data-nombre="pera">
-                    <div class="producto-imagen">🍐</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Pera</h3>
-                        <div class="calificacion-interactiva" data-producto="pera">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta jugosa y dulce con textura suave, perfecta para postres y consumo fresco.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Alto contenido de fibra</li>
-                                <li>Hidrata el cuerpo</li>
-                                <li>Mejora la salud intestinal</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en fibra, vitamina C, cobre y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mandarina -->
-                <div class="producto-card" data-nombre="mandarina">
-                    <div class="producto-imagen">🍊</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Mandarina</h3>
-                        <div class="calificacion-interactiva" data-producto="mandarina">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Cítrico dulce y fácil de pelar, ideal para consumo fresco y jugos naturales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Mejora la circulación</li>
-                                <li>Propiedades antioxidantes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Muy alta en vitamina C, vitamina A y flavonoides.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Guanábana -->
-                <div class="producto-card" data-nombre="guanábana">
-                    <div class="producto-imagen">🍈</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Guanábana</h3>
-                        <div class="calificacion-interactiva" data-producto="guanabana">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical con sabor ácido-dulce, utilizada en jugos, postres y preparaciones medicinales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Propiedades anticancerígenas</li>
-                                <li>Mejora la digestión</li>
-                                <li>Reduce la inflamación</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en vitamina C, potasio, magnesio y compuestos bioactivos.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Piña -->
-                <div class="producto-card" data-nombre="piña">
-                    <div class="producto-imagen">🍍</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Piña</h3>
-                        <div class="calificacion-interactiva" data-producto="pina">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical ácida y dulce, rica en enzimas digestivas y vitamina C.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la digestión</li>
-                                <li>Reduce la inflamación</li>
-                                <li>Fortalece huesos y dientes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en vitamina C, manganeso, bromelina y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mamón -->
-                <div class="producto-card" data-nombre="mamón">
-                    <div class="producto-imagen">🍒</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Mamón</h3>
-                        <div class="calificacion-interactiva" data-producto="mamon">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical pequeña con sabor dulce-ácido, rica en vitamina C y antioxidantes.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Mejora la salud ocular</li>
-                                <li>Propiedades antioxidantes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en vitamina C, vitamina A, calcio y fósforo.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Naranja -->
-                <div class="producto-card" data-nombre="naranja">
-                    <div class="producto-imagen">🍊</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Naranja</h3>
-                        <div class="calificacion-interactiva" data-producto="naranja">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Cítrico esencial rico en vitamina C, perfecto para jugos y consumo fresco.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Mejora la absorción de hierro</li>
-                                <li>Protege contra enfermedades cardíacas</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Extremadamente alta en vitamina C, folato, potasio y flavonoides.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Uva -->
-                <div class="producto-card" data-nombre="uva">
-                    <div class="producto-imagen">🍇</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Uva</h3>
-                        <div class="calificacion-interactiva" data-producto="uva">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta pequeña y dulce, disponible en múltiples variedades y colores, rica en antioxidantes.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Protege el corazón</li>
-                                <li>Mejora la salud cerebral</li>
-                                <li>Propiedades antiinflamatorias</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en resveratrol, vitamina K, vitamina C y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Melón -->
-                <div class="producto-card" data-nombre="melón">
-                    <div class="producto-imagen">🍈</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Melón</h3>
-                        <div class="calificacion-interactiva" data-producto="melon">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta refrescante y jugosa, perfecta para hidratación y postres saludables.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Hidrata intensamente</li>
-                                <li>Mejora la salud ocular</li>
-                                <li>Apoya la pérdida de peso</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto en agua, vitamina A, vitamina C y potasio.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Sandía -->
-                <div class="producto-card" data-nombre="sandía">
-                    <div class="producto-imagen">🍉</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Sandía</h3>
-                        <div class="calificacion-interactiva" data-producto="sandia">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta veraniega extremadamente hidratante con alto contenido de agua y licopeno.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Hidratación extrema</li>
-                                <li>Protege contra el daño solar</li>
-                                <li>Mejora la salud cardiovascular</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en licopeno, vitamina C, vitamina A y potasio.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mora -->
-                <div class="producto-card" data-nombre="mora">
-                    <div class="producto-imagen">🫐</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Mora</h3>
-                        <div class="calificacion-interactiva" data-producto="mora">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Baya oscura rica en antioxidantes, perfecta para jugos, postres y consumo fresco.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la memoria</li>
-                                <li>Protege contra el envejecimiento</li>
-                                <li>Mejora la salud digestiva</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Extremadamente alta en antioxidantes, vitamina C, vitamina K y fibra.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Parchita -->
-                <div class="producto-card" data-nombre="parchita">
-                    <div class="producto-imagen">🍈</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Parchita</h3>
-                        <div class="calificacion-interactiva" data-producto="parchita">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical con sabor ácido-dulce, rica en enzimas digestivas y vitamina C.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la digestión</li>
-                                <li>Reduce la inflamación</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en vitamina C, vitamina A, potasio y enzimas digestivas.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Zapote -->
-                <div class="producto-card" data-nombre="zapote">
-                    <div class="producto-imagen">🍑</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Zapote</h3>
-                        <div class="calificacion-interactiva" data-producto="zapote">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical dulce con pulpa cremosa, rica en vitaminas y minerales esenciales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la salud digestiva</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Propiedades antioxidantes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en vitamina C, vitamina A, calcio y fósforo.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Guayaba -->
-                <div class="producto-card" data-nombre="guayaba">
-                    <div class="producto-imagen">🥭</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Guayaba</h3>
-                        <div class="calificacion-interactiva" data-producto="guayaba">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical rica en vitamina C, utilizada en jugos, postres y preparaciones medicinales.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Extremadamente alta en vitamina C</li>
-                                <li>Mejora la digestión</li>
-                                <li>Regula la presión arterial</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Una de las frutas más ricas en vitamina C, también contiene fibra, potasio y licopeno.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tamarindo -->
-                <div class="producto-card" data-nombre="tamarindo">
-                    <div class="producto-imagen"> pods</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Tamarindo</h3>
-                        <div class="calificacion-interactiva" data-producto="tamarindo">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical con sabor ácido-dulce, utilizada en salsas, bebidas y preparaciones culinarias.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la digestión</li>
-                                <li>Reduce la inflamación</li>
-                                <li>Propiedades antioxidantes</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alto en vitamina C, vitamina B, potasio, magnesio y fibra.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mango -->
-                <div class="producto-card" data-nombre="mango">
-                    <div class="producto-imagen">🥭</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Mango</h3>
-                        <div class="calificacion-interactiva" data-producto="mango">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical jugosa y dulce, rica en vitamina C y betacaroteno, perfecta para postres y jugos.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la salud ocular</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Mejora la digestión</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Extremadamente alta en vitamina C, vitamina A (betacaroteno), fibra y antioxidantes.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Lechoza -->
-                <div class="producto-card" data-nombre="lechoza">
-                    <div class="producto-imagen">🍈</div>
-                    <div class="producto-info">
-                        <h3 class="producto-nombre">Lechoza</h3>
-                        <div class="calificacion-interactiva" data-producto="lechoza">
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <p class="producto-descripcion">Fruta tropical rica en enzimas digestivas y vitamina C, ideal para jugos y postres saludables.</p>
-                        <div class="beneficios">
-                            <h4>Beneficios:</h4>
-                            <ul>
-                                <li>Mejora la digestión</li>
-                                <li>Fortalece el sistema inmunológico</li>
-                                <li>Mejora la salud de la piel</li>
-                            </ul>
-                        </div>
-                        <div class="nutricional">
-                            <h4>Valor Nutricional:</h4>
-                            <p>Alta en vitamina C, vitamina A, potasio y enzima papaína.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="sobre-mi">
-            <h2>Sobre Mí</h2>
-            <p>Soy Yerikson Varela, agricultor apasionado por la tierra y la producción sostenible de alimentos. Mi compromiso es ofrecer productos de la más alta calidad cultivados con amor y respeto por la naturaleza. Además, soy entusiasta del mundo de las criptomonedas y la tecnología blockchain, creyendo firmemente en su potencial para transformar la agricultura y el comercio justo.</p>
-        </div>
-        
-        <div class="contacto">
-            <h3>¿Tienes sugerencias o quieres información sobre nuevos productos?</h3>
-            <p>¡Escríbeme! Estoy aquí para atenderte y responder todas tus preguntas.</p>
-            <a href="https://wa.me/message/DFXFFK4DS3HSM1" class="whatsapp-link" target="_blank">💬 Contactarme por WhatsApp</a>
-        </div>
-        
-        <!-- Chat exclusivo -->
-        <div class="chat-section">
-            <h2>💬 Comunidad Agrícola - Comentarios y Sugerencias</h2>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message"><strong>Yerikson:</strong> ¡Bienvenidos a nuestro chat comunitario! Compartan sus sugerencias de nuevos productos o comenten sobre los que ya tenemos.</div>
-                <div class="message"><strong>Ana:</strong> Me encantaría ver más información sobre cultivos orgánicos.</div>
-                <div class="message"><strong>Carlos:</strong> Excelente iniciativa, gracias por compartir este conocimiento tan valioso.</div>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Escribe tu comentario o sugerencia...">
-                <button id="sendChatBtn">Enviar</button>
-            </div>
-        </div>
-    </main>
-    
-    <footer>
-        <div class="footer-content">
-            <h3>La Grita Agrícola</h3>
-            <p>Promoviendo la agricultura sostenible y la alimentación saludable en nuestra comunidad. Conoce, valora y consume nuestros productos locales.</p>
-            <p class="autor">Creado por Yerikson Varela - Agricultor y Entusiasta de Criptomonedas</p>
-        </div>
-    </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const categoriaBtns = document.querySelectorAll('.categoria-btn');
-            const categoriaSecciones = document.querySelectorAll('.categoria-seccion');
-            const searchInput = document.getElementById('searchInput');
-            const chatInput = document.getElementById('chatInput');
-            const sendChatBtn = document.getElementById('sendChatBtn');
-            const chatMessages = document.getElementById('chatMessages');
-            const calificacionStars = document.querySelectorAll('.calificacion-interactiva');
-            
-            // Cambiar categorías
-            categoriaBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    categoriaBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const categoria = this.getAttribute('data-categoria');
-                    
-                    categoriaSecciones.forEach(seccion => {
-                        seccion.classList.remove('active');
-                    });
-                    
-                    document.getElementById(categoria).classList.add('active');
-                    
-                    // Filtrar después de cambiar de categoría
-                    filterProducts();
-                });
-            });
-            
-            // Función de búsqueda
-            function filterProducts() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeSection = document.querySelector('.categoria-seccion.active');
-                const products = activeSection.querySelectorAll('.producto-card');
-                
-                products.forEach(product => {
-                    const productName = product.getAttribute('data-nombre').toLowerCase();
-                    if (productName.includes(searchTerm)) {
-                        product.style.display = 'block';
-                    } else {
-                        product.style.display = 'none';
-                    }
-                });
-            }
-            
-            // Evento de búsqueda en tiempo real
-            searchInput.addEventListener('input', filterProducts);
-            
-            // Chat functionality
-            sendChatBtn.addEventListener('click', function() {
-                const message = chatInput.value.trim();
-                if (message) {
-                    const messageElement = document.createElement('div');
-                    messageElement.className = 'message';
-                    messageElement.innerHTML = `<strong>Usuario:</strong> ${message}`;
-                    chatMessages.appendChild(messageElement);
-                    chatInput.value = '';
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            });
-            
-            chatInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendChatBtn.click();
-                }
-            });
-            
-            // Calificación interactiva
-            calificacionStars.forEach(starContainer => {
-                const stars = starContainer.querySelectorAll('span');
-                let currentRating = 0;
-                
-                stars.forEach((star, index) => {
-                    star.addEventListener('click', function() {
-                        currentRating = index + 1;
-                        updateStars(stars, currentRating);
-                        const producto = starContainer.getAttribute('data-producto');
-                        alert(`¡Gracias por calificar ${producto} con ${currentRating} estrellas!`);
-                    });
-                    
-                    star.addEventListener('mouseover', function() {
-                        updateStars(stars, index + 1, true);
-                    });
-                    
-                    star.addEventListener('mouseout', function() {
-                        updateStars(stars, currentRating, true);
-                    });
-                });
-            });
-            
-            function updateStars(stars, rating, temporary = false) {
-                stars.forEach((star, index) => {
-                    if (index < rating) {
-                        star.textContent = '★';
-                    } else {
-                        star.textContent = temporary ? '☆' : '☆';
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
-```<!DOCTYPE html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Grita Agricultora — Hortalizas y frutas de Táchira</title>
+  <meta name="description" content="Productos agrícolas de La Grita, Táchira: variedades, beneficios, temporada y contacto directo.">
+  <link rel="canonical" href="https://yeriksonvarela-glitch.github.io/LaGritaAgricultora/">
 
-<html>
-<head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="styles/style.css"/>
-  <title> Del campo para el campo!</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="La Grita Agricultora">
+  <meta property="og:description" content="Hortalizas y frutas de La Grita, Táchira. Beneficios, temporada y contacto.">
+  <meta property="og:url" content="https://yeriksonvarela-glitch.github.io/LaGritaAgricultora/">
+  <meta property="og:image" content="img/og.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="La Grita Agricultora">
+  <meta name="twitter:description" content="Hortalizas y frutas de La Grita, Táchira.">
+  <meta name="twitter:image" content="img/og.jpg">
+
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>
-    Descubrelo por ti mismo y seras brillante
-  </h1>
+  <a class="skip" href="#productos">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Ir al inicio">
+        <img src="img/logo.svg" alt="" width="28" height="28" aria-hidden="true">
+        <span>La Grita Agricultora</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+        <span class="bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="menu" aria-label="Principal">
+        <a href="#productos">Productos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+        <button id="themeToggle" class="btn ghost" aria-label="Cambiar tema">🌙</button>
+        <a class="btn whats" href="https://wa.me/58XXXXXXXXXX" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <h1>Del surco a tu mesa</h1>
+          <p>Hortalizas y frutas de La Grita, Táchira. Frescura, sabor y tradición agrícola.</p>
+          <div class="hero__cta">
+            <a class="btn" href="#productos">Ver productos</a>
+            <a class="btn ghost" href="https://wa.me/58XXXXXXXXXX" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+          <ul class="hero__badges">
+            <li>✅ Productores locales</li>
+            <li>🚚 Envíos regionales</li>
+            <li>🌱 Cosecha responsable</li>
+          </ul>
+        </div>
+        <picture class="hero__img">
+          <source srcset="img/hero.webp" type="image/webp">
+          <img src="img/hero.jpg" alt="Canastas con hortalizas frescas de La Grita" width="640" height="420" loading="eager">
+        </picture>
+      </div>
+      <div class="hero__fade" aria-hidden="true"></div>
+    </section>
+
+    <section id="productos" class="section container">
+      <header class="section__head">
+        <h2>Productos</h2>
+        <p class="muted">Explora por categoría y descubre beneficios, temporada y usos.</p>
+      </header>
+
+      <div class="filters" role="tablist" aria-label="Filtrar productos">
+        <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+        <button class="chip" data-filter="hortaliza" role="tab" aria-selected="false">Hortalizas</button>
+        <button class="chip" data-filter="fruta" role="tab" aria-selected="false">Frutas</button>
+      </div>
+
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section class="features container section">
+      <div class="features__grid">
+        <article class="feature">
+          <div class="icon">🥕</div>
+          <h3>Frescura garantizada</h3>
+          <p class="muted">Cosecha cercana para máxima calidad y sabor.</p>
+        </article>
+        <article class="feature">
+          <div class="icon">📦</div>
+          <h3>Presentaciones a medida</h3>
+          <p class="muted">Desde cajas mixtas hasta pedidos por rubro.</p>
+        </article>
+        <article class="feature">
+          <div class="icon">🤝</div>
+          <h3>Trato directo</h3>
+          <p class="muted">Conecta con productores y apoya lo local.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="section container">
+      <header class="section__head">
+        <h2>Sobre mí</h2>
+      </header>
+      <div class="about">
+        <img class="about__img" src="img/yerikson.jpg" alt="Yerikson en zona de cultivo" width="320" height="320" loading="lazy">
+        <div class="about__text">
+          <p>Hola, soy Yerikson. Promuevo los productos de La Grita conectando a productores con consumidores y comercios. Mi meta: ofrecer frescura real y precios justos para todos.</p>
+          <ul class="ticks">
+            <li>+5 años acompañando a productores</li>
+            <li>Relaciones directas con fincas locales</li>
+            <li>Calidad y sazón tachirense</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section container">
+      <header class="section__head">
+        <h2>Contacto</h2>
+        <p class="muted">¿Tienes un pedido o consulta? Escríbeme y te respondo a la brevedad.</p>
+      </header>
+      <form class="form" action="https://formspree.io/f/tu_codigo" method="POST">
+        <label>
+          Nombre
+          <input name="nombre" autocomplete="name" required>
+        </label>
+        <label>
+          Correo
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Mensaje
+          <textarea name="mensaje" rows="4" required></textarea>
+        </label>
+        <button class="btn" type="submit">Enviar</button>
+        <p class="muted">O escríbeme directo por <a href="https://wa.me/58XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <small>La Grita, Táchira • Última actualización: <time datetime="2025-09-28">28/09/2025</time></small>
+      <small>© <span id="year"></span> La Grita Agricultora</small>
+    </div>
+  </footer>
+
+  <!-- Botón flotante WhatsApp -->
+  <a class="fab-whats" aria-label="Abrir WhatsApp" href="https://wa.me/58XXXXXXXXXX" target="_blank" rel="noopener">✆</a>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "La Grita Agricultora",
+    "url": "https://yeriksonvarela-glitch.github.io/LaGritaAgricultora/",
+    "logo": "https://yeriksonvarela-glitch.github.io/LaGritaAgricultora/img/logo.png",
+    "sameAs": []
+  }
+  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
