@@ -80,7 +80,7 @@ function cardHTML(p){
       <p class="meta">Usos: ${usos}</p>
     </div>
     <div class="actions">
-      <a class="btn ghost" href="https://wa.me/58XXXXXXXXXX?text=Hola,%20quiero%20${encodeURIComponent(p.nombre)}" target="_blank" rel="noopener">Consultar</a>
+  <a class="btn ghost" href="https://wa.me/584247394025?text=Hola,%20quiero%20${encodeURIComponent(p.nombre)}" target="_blank" rel="noopener">Consultar</a>
       <button class="btn" aria-label="Más info de ${p.nombre}">Guardar</button>
     </div>
   </article>`;
