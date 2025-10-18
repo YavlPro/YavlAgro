@@ -22,7 +22,7 @@ python3 -m http.server 8000
 
 ## Publicación
 El sitio está preparado para GitHub Pages:
-- URL: https://yeriksonvarela-glitch.github.io/YavlAgro/
+- URL: https://yavlpro.github.io/YavlAgro/
 - `index.html` redirige a `YavlAgro.html`.
 
 ## Contacto
