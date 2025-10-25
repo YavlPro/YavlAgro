@@ -3,98 +3,340 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>YavlAgro — Hortalizas y frutas de Táchira</title>
-  <meta name="description" content="Productos agrícolas de La Grita, Táchira: variedades, beneficios, temporada y contacto directo.">
-  <link rel="canonical" href="https://yavlpro.github.io/YavlAgro/YavlAgro.html">
-  <!-- Redirección inmediata a la portada preferida -->
-  <meta http-equiv="refresh" content="0; url=YavlAgro.html">
+  <title>YavlAgro — El Agro de Táchira (Cyberpunk) 👑</title>
+  <meta name="description" content="Productos agrícolas futuristas de La Grita, Táchira: variedades, beneficios, temporada y contacto directo.">
+  <link rel="canonical" href="https://yavlpro.github.io/YavlAgro/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="YavlAgro">
   <meta property="og:description" content="Hortalizas y frutas de La Grita, Táchira. Beneficios, temporada y contacto.">
-  <meta property="og:url" content="https://yavlpro.github.io/YavlAgro/YavlAgro.html">
+  <meta property="og:url" content="https://yavlpro.github.io/YavlAgro/">
   <meta property="og:image" content="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?q=80&w=1200&auto=format&fit=crop">
 
-  <!-- Favicon opcional -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'%3E%3Cpath fill='%2338d39f' d='M3 20q-.425 0-.712-.288T2 19v-5q0-.825.588-1.412T4 12h4q.825 0 1.413.588T10 14v5q0 .425-.288.713T9 20zM14 20q-.425 0-.712-.288T13 19v-7q0-.825.588-1.412T15 10h4q.825 0 1.413.588T21 12v7q0 .425-.288.713T20 20zM7 10q-.425 0-.712-.288T6 9V5q0-.825.588-1.412T8 3h8q.825 0 1.413.588T18 5v4q0 .425-.288.713T17 10z'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffc107' d='M3 20q-.425 0-.712-.288T2 19v-5q0-.825.588-1.412T4 12h4q.825 0 1.413.588T10 14v5q0 .425-.288.713T9 20zM14 20q-.425 0-.712-.288T13 19v-7q0-.825.588-1.412T15 10h4q.825 0 1.413.588T21 12v7q0 .425-.288.713T20 20zM7 10q-.425 0-.712-.288T6 9V5q0-.825.588-1.412T8 3h8q.825 0 1.413.588T18 5v4q0 .425-.288.713T17 10z'/%3E%3C/svg%3E">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#0e0f12; --card:#15171b; --elev:#1b1e24; --text:#e8eaed; --muted:#b9c0cc;
-      --acc:#38d39f; --acc-2:#1fb980; --border:#252a33; --shadow:0 10px 30px rgba(0,0,0,.35);
+    /* ============================================= */
+    /* YAVLGOLD "OPUS CYBERPUNK" PALETTE */
+    /* ============================================= */
+    :root {
+        --cyber-gold: #ffc107;
+        --neon-green: #00ffcc;
+        --neon-pink: #ff00e5;
+        --neon-purple: #9d00ff;
+        --accent-red: #ff3366;
+        
+        --dark-background: #0a0a0a;
+        --card-background: #0f0f0f;
+        --border-dark: #2a2a2a;
+        --light-text: #e0e0e0;
+        --dim-text: #a0a0a0;
+        
+        --shadow:0 0 30px rgba(255, 193, 7, 0.2);
+        --transition-speed: 0.3s;
     }
-    html[data-theme="light"]{
-      --bg:#f7f8fb; --card:#ffffff; --elev:#ffffff; --text:#111417; --muted:#586071;
-      --acc:#1fb980; --acc-2:#109e6b; --border:#e8ecf2; --shadow:0 10px 25px rgba(0,0,0,.08);
+    
+    /* Tema Claro (Stub) */
+    html[data-theme="light"] {
+        --dark-background: #f5f5f5;
+        --card-background: #fafafa;
+        --border-dark: #dddddd;
+        --light-text: #333333;
+        --dim-text: #666666;
+        --shadow:0 10px 25px rgba(0,0,0,.08);
     }
+    
+    /* ============================================= */
+    /* RESET Y BASE CYBERPUNK */
+    /* ============================================= */
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif}
+    body{
+      margin:0;
+      background:var(--dark-background);
+      color:var(--light-text);
+      /* FUENTES OPUS */
+      font-family: 'Share Tech Mono', monospace;
+      font-size:16px;
+      line-height:1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* FONDO ANIMADO Y SCANLINES (OPUS) */
+    .animated-background {
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: -2;
+        background: linear-gradient(45deg, var(--dark-background) 0%, #0a0a0a 25%, #0a0a0a 50%, #0a0a0a 75%, var(--dark-background) 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        opacity: 0.7;
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    body::before {
+        content: ""; position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 193, 7, 0.02) 2px, rgba(255, 193, 7, 0.02) 4px);
+        z-index: -1;
+        pointer-events: none;
+    }
+
     .container{max-width:1100px;margin-inline:auto;padding:0 20px}
     .section{padding:56px 0}
     .section__head{margin-bottom:18px}
-    h1,h2,h3{margin:0 0 10px}
-    h1{font-size:clamp(30px,5vw,44px);line-height:1.15}
-    h2{font-size:clamp(22px,3.2vw,30px)}
-    h3{font-size:18px}
-    .muted{color:var(--muted)}
+    
+    h1,h2,h3{
+      margin:0 0 10px;
+      /* FUENTE OPUS */
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+    }
+    
+    h1{
+      font-size:clamp(30px,5vw,44px);
+      line-height:1.15;
+      color: var(--cyber-gold);
+      text-shadow: 0 0 20px var(--cyber-gold), 0 0 40px rgba(255, 193, 7, 0.5);
+      animation: goldPulse 3s ease-in-out infinite;
+    }
+    @keyframes goldPulse {
+        0%, 100% { text-shadow: 0 0 20px var(--cyber-gold), 0 0 40px var(--cyber-gold); }
+        50% { text-shadow: 0 0 30px var(--cyber-gold), 0 0 60px rgba(255, 193, 7, 0.7); }
+    }
+    
+    h2{
+      font-size:clamp(22px,3.2vw,30px);
+      color: var(--neon-green);
+      text-shadow: 0 0 15px var(--neon-green);
+    }
+    h3{font-size:18px; color: var(--light-text);}
+    
+    .muted{color:var(--dim-text)}
+    
     .ticks{list-style:none;padding:0;margin:14px 0 0}
     .ticks li{padding-left:26px;position:relative;margin:8px 0}
-    .ticks li:before{content:"✓";position:absolute;left:0;color:var(--acc)}
+    .ticks li:before{content:"✓";position:absolute;left:0;color:var(--cyber-gold)}
+    
     .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip:focus{left:12px;top:12px;width:auto;height:auto;background:var(--card);color:var(--text);padding:8px 10px;border-radius:8px;z-index:999}
-    .site-header{position:sticky;top:0;z-index:50;background:rgba(14,15,18,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-    html[data-theme="light"] .site-header{background:rgba(255,255,255,.7)}
+    .skip:focus{left:12px;top:12px;width:auto;height:auto;background:var(--card-background);color:var(--light-text);padding:8px 10px;border-radius:8px;z-index:999}
+    
+    .site-header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(10, 10, 10, 0.9); /* OPUS BG */
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border-dark);
+      box-shadow: 0 3px 20px rgba(255, 193, 7, 0.1);
+    }
+    
     .nav{display:flex;align-items:center;justify-content:space-between;min-height:64px}
-    .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:700}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--light-text);text-decoration:none;font-weight:700; font-family: 'Orbitron', sans-serif;}
     .brand svg{display:block}
+    
     .menu{display:flex;align-items:center;gap:14px}
-    .menu a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:10px}
-    .menu a:hover{background:var(--elev)}
+    .menu a{color:var(--dim-text);text-decoration:none;padding:8px 10px;border-radius:10px; transition: var(--transition-speed) ease;}
+    .menu a:hover{background:var(--card-background); color: var(--cyber-gold); text-shadow: 0 0 10px var(--cyber-gold);}
+    
     .nav-toggle{display:none;flex-direction:column;gap:5px;background:transparent;border:0}
-    .nav-toggle .bar{width:24px;height:2px;background:var(--text);border-radius:2px}
-    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--acc),var(--acc-2));color:#07341f;border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
-    .btn:hover{filter:brightness(1.05)}
-    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none}
-    .btn.whats{background:#25D366;color:#08361c}
-    .chip{border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer}
-    .chip.is-active{background:linear-gradient(135deg,var(--acc),var(--acc-2));color:#08361c;border-color:transparent}
-    .hero{position:relative;padding:64px 0 32px;overflow:hidden;border-bottom:1px solid var(--border)}
+    .nav-toggle .bar{width:24px;height:2px;background:var(--light-text);border-radius:2px}
+    
+    /* ============================================= */
+    /* BOTONES CYBERPUNK */
+    /* ============================================= */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--cyber-gold);
+      color: var(--dark-background);
+      border: 2px solid var(--cyber-gold);
+      border-radius: 8px; /* Bordes duros */
+      padding:10px 14px;
+      font-weight:700;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor:pointer;
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+      transition: var(--transition-speed) ease;
+    }
+    .btn:hover{
+      background:var(--cyber-gold);
+      color: var(--dark-background);
+      box-shadow: 0 0 30px var(--cyber-gold);
+      transform: translateY(-2px);
+    }
+    
+    .btn.ghost{
+      background:transparent;
+      color:var(--light-text);
+      border: 2px solid var(--border-dark);
+      box-shadow:none;
+    }
+    .btn.ghost:hover{
+      background: var(--card-background);
+      color: var(--cyber-gold);
+      border-color: var(--cyber-gold);
+      box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+    }
+    
+    .btn.whats{
+      background: #25D366;
+      border-color: #25D366;
+      color: #08361c;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+    }
+    .btn.whats:hover{
+      background: #25D366;
+      color: #000;
+      box-shadow: 0 0 30px rgba(37, 211, 102, 0.5);
+    }
+    
+    /* ============================================= */
+    /* CHIPS Y TARJETAS */
+    /* ============================================= */
+    .chip{
+      border:1px solid var(--border-dark);
+      background:var(--card-background);
+      color:var(--dim-text);
+      padding:8px 12px;
+      border-radius: 8px; /* Bordes duros */
+      cursor:pointer;
+      font-family: 'Orbitron', sans-serif;
+      transition: var(--transition-speed) ease;
+    }
+    .chip:hover {
+      color: var(--light-text);
+      border-color: var(--dim-text);
+    }
+    .chip.is-active{
+      background: var(--cyber-gold);
+      color: var(--dark-background);
+      border-color: var(--cyber-gold);
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+    }
+    
+    .hero{position:relative;padding:64px 0 32px;overflow:hidden;border-bottom:1px solid var(--border-dark)}
     .hero__inner{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}
     .hero__cta{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-    .hero__badges{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 0;padding:0;list-style:none;color:var(--muted);font-size:14px}
-    .hero__img img{width:100%;height:auto;border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow)}
+    .hero__badges{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 0;padding:0;list-style:none;color:var(--dim-text);font-size:14px}
+    .hero__img img{
+      width:100%;height:auto;border-radius:18px;
+      border:1px solid var(--border-dark);
+      box-shadow:var(--shadow);
+    }
     .hero__fade{position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.25));pointer-events:none}
+    
     .features__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .feature{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
-    .feature .icon{font-size:22px;margin-bottom:6px}
+    .feature{
+      background:var(--card-background);
+      border:1px solid var(--border-dark);
+      border-radius:16px;padding:16px;
+      transition: var(--transition-speed) ease;
+    }
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--cyber-gold);
+    }
+    .feature .icon{font-size:22px;margin-bottom:6px; color: var(--cyber-gold); text-shadow: 0 0 10px var(--cyber-gold);}
+    
     .filters{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
     .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transform:translateY(8px);opacity:0;transition:opacity .5s ease, transform .5s ease}
+    
+    .card{
+      background:var(--card-background);
+      border:1px solid var(--border-dark);
+      border-radius:16px;
+      overflow:hidden;display:flex;flex-direction:column;
+      transform:translateY(8px);opacity:0;transition:opacity .5s ease, transform .5s ease;
+    }
+    .card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--cyber-gold);
+    }
+    
     .card.reveal{opacity:1;transform:none}
     .card img{width:100%;height:170px;object-fit:cover;display:block}
     .card .body{padding:14px}
-    .badge{display:inline-block;font-size:12px;color:#0d2917;background:linear-gradient(180deg,#aaf0c6,#79dfa4);padding:4px 8px;border-radius:999px;margin-bottom:8px}
-    .meta{color:var(--muted);font-size:13px;margin-top:8px}
-    .card .actions{display:flex;gap:8px;margin-top:auto;padding:0 14px 14px}
-    .about{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:center}
-    .about__img{width:100%;height:auto;border-radius:16px;border:1px solid var(--border);object-fit:cover}
-    .form{display:grid;gap:12px;max-width:560px}
-    .form label{display:grid;gap:6px;font-weight:600}
-    .form input,.form textarea{padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--elev);color:var(--text)}
-    .form input:focus,.form textarea:focus{outline:2px solid var(--acc)}
-    .site-footer{border-top:1px solid var(--border);padding:18px 0}
-    .footer__inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted)}
-    .fab-whats{
-      position:fixed;right:16px;bottom:16px;background:#25D366;color:white;border-radius:999px;
-      width:56px;height:56px;display:grid;place-items:center;box-shadow:var(--shadow);z-index:40;
-      text-decoration:none;font-weight:700;font-size:22px
+    
+    .badge{
+      display:inline-block;font-size:12px;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--dark-background);
+      background: var(--cyber-gold);
+      padding:4px 8px;border-radius: 6px;margin-bottom:8px;
     }
+    .meta{color:var(--dim-text);font-size:13px;margin-top:8px}
+    .card .actions{display:flex;gap:8px;margin-top:auto;padding:0 14px 14px}
+    
+    .about{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:center}
+    .about__img{
+      width:100%;height:auto;border-radius:16px;
+      border:1px solid var(--border-dark);
+      object-fit:cover;
+      box-shadow: var(--shadow);
+    }
+    
+    /* ============================================= */
+    /* FORMULARIO CYBERPUNK */
+    /* ============================================= */
+    .form{display:grid;gap:12px;max-width:560px}
+    .form label{display:grid;gap:6px;font-weight:600; font-family: 'Orbitron', sans-serif;}
+    .form input,.form textarea{
+      padding:10px 12px;border-radius:8px;
+      border:1px solid var(--border-dark);
+      background:var(--card-background);
+      color:var(--light-text);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1em;
+      transition: var(--transition-speed) ease;
+    }
+    .form input:focus,.form textarea:focus{
+      outline:none;
+      border-color:var(--neon-green);
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+    }
+    
+    .site-footer{
+      border-top:3px solid var(--cyber-gold); /* OPUS BORDER */
+      padding:18px 0;
+      margin-top: 40px;
+    }
+    .footer__inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--dim-text)}
+    
+    .fab-whats{
+      position:fixed;right:16px;bottom:16px;
+      background:#25D366;color:white;border-radius:999px;
+      width:56px;height:56px;display:grid;place-items:center;
+      box-shadow:0 0 20px #25D366; /* GLOW */
+      z-index:40;
+      text-decoration:none;font-weight:700;font-size:22px;
+      transition: var(--transition-speed) ease;
+    }
+    .fab-whats:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 0 30px #25D366;
+    }
+    
     @media (max-width: 900px){
       .hero__inner{grid-template-columns:1fr}
       .about{grid-template-columns:1fr}
-      .menu{position:fixed;inset:64px 0 auto 0;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 20px;gap:10px;transform:translateY(-120%);transition:transform .3s ease}
+      .menu{
+        position:fixed;inset:64px 0 auto 0;
+        background:rgba(10, 10, 10, 0.95); /* OPUS BG */
+        backdrop-filter: blur(8px);
+        border-bottom:1px solid var(--border-dark);
+        padding:10px 20px;gap:10px;
+        transform:translateY(-120%);transition:transform .3s ease;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .menu .btn { width: 100%; justify-content: center; }
       .menu.open{transform:none}
       .nav-toggle{display:flex}
     }
@@ -104,28 +346,15 @@
   </style>
 </head>
 <body>
-  <script>
-    // Redirección con JS (más fiable que meta refresh)
-    (function(){
-      var target = 'YavlAgro.html';
-      if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) {
-        try { window.location.replace(target); } catch (_) { window.location.href = target; }
-      }
-    })();
-  </script>
-  <noscript>
-    <div style="padding:12px;background:#fff3cd;color:#5c4600;border:1px solid #ffe69c;margin:8px;font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;border-radius:8px">
-      Si no eres redirigido automáticamente, haz clic aquí: 
-      <a href="/YavlAgro.html">Abrir YavlAgro</a>
-    </div>
-  </noscript>
+  
+  <div class="animated-background"></div>
+
   <a class="skip" href="#productos">Saltar al contenido</a>
 
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Ir al inicio">
-        <!-- Logo inline -->
-        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="#38d39f" d="M3 20q-.425 0-.712-.288T2 19v-5q0-.825.588-1.412T4 12h4q.825 0 1.413.588T10 14v5q0 .425-.288.713T9 20zM14 20q-.425 0-.712-.288T13 19v-7q0-.825.588-1.412T15 10h4q.825 0 1.413.588T21 12v7q0 .425-.288.713T20 20zM7 10q-.425 0-.712-.288T6 9V5q0-.825.588-1.412T8 3h8q.825 0 1.413.588T18 5v4q0 .425-.288.713T17 10z"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--cyber-gold)" d="M3 20q-.425 0-.712-.288T2 19v-5q0-.825.588-1.412T4 12h4q.825 0 1.413.588T10 14v5q0 .425-.288.713T9 20zM14 20q-.425 0-.712-.288T13 19v-7q0-.825.588-1.412T15 10h4q.825 0 1.413.588T21 12v7q0 .425-.288.713T20 20zM7 10q-.425 0-.712-.288T6 9V5q0-.825.588-1.412T8 3h8q.825 0 1.413.588T18 5v4q0 .425-.288.713T17 10z"/></svg>
         <span>YavlAgro</span>
       </a>
 
@@ -139,9 +368,8 @@
         <a href="#productos">Productos</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#contacto">Contacto</a>
-        <a href="roadmap.html">Roadmap</a>
         <button id="themeToggle" class="btn ghost" aria-label="Cambiar tema">🌙</button>
-  <a class="btn whats" href="https://wa.me/584247394025" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
+        <a class="btn whats" href="https://wa.me/584247394025" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
       </nav>
     </div>
   </header>
@@ -151,7 +379,7 @@
       <div class="container hero__inner">
         <div class="hero__text">
           <h1>Del surco a tu mesa</h1>
-          <p>Hortalizas y frutas de La Grita, Táchira. Frescura, sabor y tradición agrícola.</p>
+          <p class="muted" style="font-size: 1.1em; color: var(--light-text);">Hortalizas y frutas de La Grita, Táchira. Frescura, sabor y tradición agrícola en la era digital.</p>
           <div class="hero__cta">
             <a class="btn" href="#productos">Ver productos</a>
             <a class="btn ghost" href="https://wa.me/584247394025" target="_blank" rel="noopener">Pedir por WhatsApp</a>
@@ -211,7 +439,7 @@
       <div class="about">
         <img class="about__img" src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?q=80&w=700&auto=format&fit=crop" alt="Yerikson en zona de cultivo" width="320" height="320" loading="lazy">
         <div class="about__text">
-          <p>Hola, soy Yerikson. Promuevo los productos de La Grita conectando a productores con consumidores y comercios. Mi meta: ofrecer frescura real y precios justos para todos.</p>
+          <p style="font-size: 1.1em; color: var(--light-text);">Hola, soy Yerikson. Promuevo los productos de La Grita conectando a productores con consumidores y comercios. Mi meta: ofrecer frescura real y precios justos para todos.</p>
           <ul class="ticks">
             <li>+5 años acompañando a productores</li>
             <li>Relaciones directas con fincas locales</li>
@@ -240,7 +468,7 @@
           <textarea name="mensaje" rows="4" required></textarea>
         </label>
         <button class="btn" type="submit">Enviar</button>
-  <p class="muted">O escríbeme directo por <a href="https://wa.me/584247394025" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p class="muted">O escríbeme directo por <a href="https://wa.me/584247394025" target="_blank" rel="noopener">WhatsApp</a>.</p>
       </form>
     </section>
   </main>
@@ -248,11 +476,9 @@
   <footer class="site-footer">
     <div class="container footer__inner">
       <small>La Grita, Táchira • Última actualización: <time datetime="2025-09-28">28/09/2025</time></small>
-      <small>© <span id="year"></span> La Grita Agricultora</small>
-    </div>
+      <small>© <span id="year"></span> YavlAgro</small> </div>
   </footer>
 
-  <!-- Botón flotante WhatsApp -->
   <a class="fab-whats" aria-label="Abrir WhatsApp" href="https://wa.me/584247394025" target="_blank" rel="noopener">✆</a>
 
   <script type="application/ld+json">
@@ -260,13 +486,13 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "YavlAgro",
-  "url": "https://yavlpro.github.io/YavlAgro/YavlAgro.html",
+    "url": "https://yavlpro.github.io/YavlAgro/",
     "logo": "https://yavlpro.github.io/YavlAgro/logo.png"
   }
   </script>
 
   <script>
-    // Datos de productos: edita, agrega o quita
+    // --- (INICIO) NO TOCAR DATA DE PRODUCTOS ---
     const productos = [
       {
         id: "papa",
@@ -329,6 +555,7 @@
         alt: "Ajíes rojos y verdes"
       }
     ];
+    // --- (FIN) NO TOCAR DATA DE PRODUCTOS ---
 
     const d = document;
     const grid = d.getElementById("grid");
@@ -348,7 +575,7 @@
           <p class="meta">Usos: ${usos}</p>
         </div>
         <div class="actions">
-          <a class="btn whats" href="${wa}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          <a class="btn whats" href="${wa}" target="_blank" rel="noopener">Pedir</a>
           <button class="btn ghost" aria-label="Guardar ${p.nombre}" data-save="${p.id}">Guardar</button>
         </div>
       </article>`;
@@ -410,12 +637,16 @@
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
 
-    // Tema claro/oscuro
+    // Tema claro/oscuro (Lógica OPUS)
     const root = d.documentElement;
     const themeBtn = d.getElementById("themeToggle");
-    function setTheme(t){ root.setAttribute("data-theme", t); localStorage.setItem("theme", t); themeBtn.textContent = t === "light" ? "🌞" : "🌙"; }
+    function setTheme(t){ 
+        root.setAttribute("data-theme", t); 
+        localStorage.setItem("theme", t); 
+        themeBtn.textContent = t === "light" ? "☀️" : "🌙"; // Sol / Luna
+    }
     const saved = localStorage.getItem("theme");
-    setTheme(saved || "dark");
+    setTheme(saved || "dark"); // Default a Dark
     themeBtn?.addEventListener("click", () => {
       const t = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       setTheme(t);
